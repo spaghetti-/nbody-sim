@@ -28,6 +28,7 @@ get_viewer(typename pcl::PointCloud<T>::ConstPtr cloud, int size)
 void disturb(pcl::PointCloud<Body>::Ptr cloud) {
   for (int i = 0; i < cloud->points.size(); i++) {
     for (int j = 0; j < cloud->points.size(); j++) {
+      if (i == j) continue;
       double r = pcl::squaredEuclideanDistance(
           cloud->points[j],
           cloud->points[i]
@@ -54,7 +55,7 @@ int main(int argc, char *argv[])
   std::random_device rd;
   std::mt19937 mt(rd());
   std::uniform_real_distribution<double> dist(1, 1000.0);
-  std::uniform_real_distribution<double> mass_dist(1e9, 1e13);
+  std::uniform_real_distribution<double> mass_dist(1e10, 1e12);
 
   int nbody = 100;
   int point_size = 2;
