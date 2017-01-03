@@ -8,12 +8,17 @@ endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
-find_package(PCL 1.3 REQUIRED COMPONENTS common visualization)
+find_package(PCL 1.8 REQUIRED COMPONENTS common visualization octree)
+
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin/")
 add_executable(nbody src/main.cpp)
+add_executable(barnes src/barnes.cpp)
 target_link_libraries(nbody ${PCL_COMMON_LIBRARIES}
+  ${PCL_VISUALIZATION_LIBRARIES})
+target_link_libraries(barnes ${PCL_COMMON_LIBRARIES}
+  ${PCL_OCTREE_LIBRARIES}
   ${PCL_VISUALIZATION_LIBRARIES})

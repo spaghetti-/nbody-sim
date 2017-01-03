@@ -60,8 +60,9 @@ int main(int argc, char *argv[])
   int point_size = 2;
   if (argc >= 2) {
     nbody = std::atoi(argv[1]);
-    point_size = 4;
   }
+
+  if (nbody < 10) point_size = 4;
 
   for (int i = 0; i < nbody; i++) {
     points->push_back(Body(dist(mt), dist(mt), dist(mt), mass_dist(mt)));
